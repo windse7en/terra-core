@@ -49,9 +49,7 @@
     "test:nightwatch-safari-enormous": "$(cd ..; npm bin)/nightwatch --config tests/nightwatch.conf.js -e safari-enormous"
   },
   "devDependencies": {
-    "terra-toolkit": "^0.1.0",
-    "csvtojson": "^1.1.4",
-    "svgo": "^0.7.1"
+    "terra-toolkit": "^0.1.0"
   },
   "peerDependencies": {
     "react": "^15.4.2",
@@ -60,7 +58,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "lodash": "^4.17.4",
     "terra-mixins": "^1.0.0"
   }
 }

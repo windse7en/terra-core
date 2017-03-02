@@ -1,0 +1,19 @@
+import React from 'react';
+import Icon from 'terra-icon';
+import classNames from 'classnames';
+
+const SvgIcon = customProps => {
+  const attributes = Object.assign({}, customProps);
+  attributes.className = classNames(<%=  JSON.stringify(icon.attributes.className) %>, attributes.className);
+
+  return (
+    <Icon {...attributes}>
+      <%= icon.children %>
+    </Icon>
+  )
+};
+
+SvgIcon.displayName = <%= JSON.stringify(icon.name) %>;
+SvgIcon.defaultProps = <%= JSON.stringify(icon.attributes) %>;
+
+export default SvgIcon;

@@ -1,0 +1,5 @@
+exports[`nodeToJsxNode attribute class should change to className 1`] = `"<path className=\"math\" ></path>"`;
+
+exports[`nodeToJsxNode non-hyphenated attributes should stay the same 1`] = `"<path fill=\"#232\" ></path>"`;
+
+exports[`nodeToJsxNode white-listed attributes should change to jsx 1`] = `"<path fillRule=\"evenodd\" ></path>"`;
