@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+// eslint-disable-next-line import/no-unresolved, import/no-webpack-loader-syntax
+
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -43,8 +47,6 @@ var propTypes = {
    */
   focusable: _react.PropTypes.bool
 };
-// eslint-disable-next-line import/no-unresolved, import/no-webpack-loader-syntax
-
 
 var defaultProps = {
   isBidi: false,
@@ -56,7 +58,7 @@ var defaultProps = {
 };
 
 var Icon = function Icon(props) {
-  var attributes = Object.assign({}, props);
+  var attributes = _extends({}, props);
 
   attributes.className = (0, _classnames2.default)(attributes.className, { 'terra-Icon': attributes.className.indexOf('terra-Icon') < 0 }, { 'is-bidi': attributes.isBidi });
 
