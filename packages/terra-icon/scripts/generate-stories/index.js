@@ -3,7 +3,7 @@ const fs = require('fs');
 const upperFirst = require('lodash').upperFirst;
 /* eslint-enable import/no-extraneous-dependencies */
 
-const iconFolders = ['Static', 'Themeable'];
+const iconFolders = ['static', 'themeable'];
 
 
 iconFolders.forEach((iconFolder) => {
@@ -12,7 +12,7 @@ iconFolders.forEach((iconFolder) => {
     const icons = files.map((file) => {
       const obj = {
         component: `${upperFirst(file).slice(0, -4).replace(/-|_|\s/g, '')}Icon`,
-        filepath: `../src/icon/${iconFolder}/${file}`,
+        filepath: `../lib/icon/${iconFolder}/${file}`,
       };
 
       return obj;

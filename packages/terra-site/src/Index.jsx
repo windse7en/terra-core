@@ -10,6 +10,7 @@ import ArrangeExamples from '../../../packages/terra-arrange/examples/index';
 import BadgeExamples from '../../../packages/terra-badge/examples/index';
 import ButtonExamples from '../../../packages/terra-button/examples/index';
 import GridExamples from '../../../packages/terra-grid/examples/Index';
+import IconExamples from 'terra-icon/examples/Index';
 
 // Test
 import ButtonTestRoutes from '../../../packages/terra-button/tests/nightwatch/ButtonTestRoutes';

@@ -43,7 +43,8 @@
     "terra-arrange": "^0.1.0",
     "terra-button": "^0.1.0",
     "terra-legacy-theme": "^0.1.0",
-    "terra-react-svg-loader": "git://github.com/cerner/terra-react-svg-loader.git#master",
+    "terra-react-svg-loader": "^0.1.0",
+    "terra-icon": "^0.1.0",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2",
     "webpack-stats-plugin": "^0.1.4"

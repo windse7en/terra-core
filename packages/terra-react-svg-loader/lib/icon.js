@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _transformChildren = require('./transformChildren');
 
 var _transformChildren2 = _interopRequireDefault(_transformChildren);
@@ -31,7 +33,7 @@ var Icon = function Icon(name, node) {
   this.attributes = Array.prototype.slice.call(node.attributes).map(function (x) {
     return { name: (0, _htmlToReactAttributes2.default)(x.name), value: x.value };
   }).reduce(function (attrs, x) {
-    return Object.assign(_defineProperty({}, x.name, x.value), attrs);
+    return _extends(_defineProperty({}, x.name, x.value), attrs);
   }, {});
 };
 
