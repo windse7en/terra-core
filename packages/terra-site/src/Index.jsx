@@ -18,6 +18,7 @@ import ImageExamples from '../../../packages/terra-image/examples/Index';
 import ProgressBarExamples from '../../../packages/terra-progress-bar/examples/Index';
 import StatusExamples from '../../../packages/terra-status/examples/Index';
 import TitleExamples from '../../../packages/terra-title/examples/Index';
+import TogglerExamples from '../../../packages/terra-toggler/examples/Index';
 import SlidePanelExamples from '../../../packages/terra-slide-panel/examples/Index';
 
 // Test
@@ -42,6 +43,7 @@ ReactDOM.render((
       <Route path="progress-bar" component={ProgressBarExamples} />
       <Route path="status" component={StatusExamples} />
       <Route path="title" component={TitleExamples} />
+      <Route path="toggler" component={TogglerExamples} />
       <Route path="slide-panel" component={SlidePanelExamples} />
     </Route>
     <Route path="/tests" component={TestLinks} />

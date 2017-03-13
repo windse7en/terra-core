@@ -45,7 +45,6 @@
     "pretest": "npm run lint",
     "postinstall": "npm run bootstrap",
     "test": "lerna exec --concurrency 1 npm test",
-    "pretest": "npm run lint",
     "prepush": "node scripts/prepush/index.js",
     "start": "cd packages/terra-site && npm run start"
   },
@@ -71,6 +70,7 @@
     "lerna": "2.0.0-beta.36",
     "marked": "^0.3.6",
     "nightwatch": "^0.9.12",
+    "node-sass": "^4.5.0",
     "phantomjs-prebuilt": "^2.1.14",
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
