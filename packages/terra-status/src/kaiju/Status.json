@@ -1,0 +1,12 @@
+{
+  "name": "Status",
+  "display": "Status",
+  "description": "Provides a customizable color indictor to signify a specific condition",
+  "group": "Indicators",
+  "properties": [
+    {
+      "name": "color",
+      "type": "String"
+    }
+  ]
+}
