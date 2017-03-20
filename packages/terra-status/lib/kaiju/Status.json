@@ -3,10 +3,9 @@
   "display": "Status",
   "description": "Provides a customizable color indictor to signify a specific condition",
   "group": "Indicators",
-  "properties": [
-    {
-      "name": "color",
+  "properties":{
+    "color":{
       "type": "String"
     }
-  ]
+  }
 }

@@ -3,26 +3,21 @@
   "display": "Button",
   "description": "Provides a way to trigger actions in the UI",
   "group": "Buttons",
-  "properties": [
-    {
-      "name": "href",
+  "properties" : {
+    "href": {
       "type": "String"
     },
-    {
-      "name": "isBlock",
+    "isBlock": {
       "type": "Boolean"
     },
-    {
-      "name": "isDisabled",
+    "isDisabled": {
       "type": "Boolean"
     },
-    {
-      "name": "isReversed",
+    "isReversed": {
       "type": "Boolean"
     },
-    {
-      "name": "text",
+    "text": {
       "type": "String"
     }
-  ]
+  }
 }
