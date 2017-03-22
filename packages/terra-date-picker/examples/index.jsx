@@ -25,10 +25,23 @@ import DatePickerStartDate from './DatePickerStartDate';
 import DatePickerTodayButton from './DatePickerTodayButton';
 import DateRange from './DateRange';
 
+// Text Masking Example Files
+import DatePickerTextMaskingReactInputMask from './DatePickerTextMaskingReactInputMask';
+import DatePickerTextMaskingReactTextMask from './DatePickerTextMaskingReactTextMask';
+import DatePickerTextMaskingReactMaskedInput from './DatePickerTextMaskingReactMaskedInput';
+
 const DatePickerExamples = () => (
   <div>
     <Markdown id="readme" src={ReadMe} />
     <PropsTable id="props" src={DatePickerSrc} />
+
+    <h2 id="react-input-mask">react-input-mask</h2>
+    <DatePickerTextMaskingReactInputMask />
+    <h2 id="react-masked-input">react-masked-input</h2>
+    <DatePickerTextMaskingReactMaskedInput />
+    <h2 id="react-text-mask">react-text-mask</h2>
+    <DatePickerTextMaskingReactTextMask />
+
     <h2 id="default">Default</h2>
     <DatePickerDefault />
     <h2 id="custom-input">Custom Input</h2>

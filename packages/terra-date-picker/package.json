@@ -33,8 +33,12 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "moment": "^2.17.1",
-    "react-datepicker": "^0.41.1",
-    "terra-mixins": "^1.0.0"
+    "react-datepicker": "^0.43.0",
+    "react-input-mask": "^0.7.8",
+    "react-maskedinput": "^3.3.4",
+    "react-text-mask": "^2.3.0",
+    "terra-mixins": "^1.0.0",
+    "text-mask-addons": "^3.5.0"
   },
   "scripts": {
     "compile": "npm run compile:clean && npm run compile:build",
