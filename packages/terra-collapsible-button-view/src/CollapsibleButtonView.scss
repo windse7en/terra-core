@@ -1,0 +1,11 @@
+@import '~terra-mixins';
+@import './variables';
+@import './mixins';
+
+.terra-CollapsibleButtonView {
+  background: $terra-grey-20;
+  height: 22px;
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+}
