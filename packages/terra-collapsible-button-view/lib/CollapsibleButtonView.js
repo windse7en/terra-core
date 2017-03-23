@@ -10,9 +10,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactMeasure = require('react-measure');
+var _resizeObserverPolyfill = require('resize-observer-polyfill');
 
-var _reactMeasure2 = _interopRequireDefault(_reactMeasure);
+var _resizeObserverPolyfill2 = _interopRequireDefault(_resizeObserverPolyfill);
 
 require('./CollapsibleButtonView.scss');
 
@@ -41,23 +41,54 @@ var CollapsibleButtonView = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (CollapsibleButtonView.__proto__ || Object.getPrototypeOf(CollapsibleButtonView)).call(this, props));
 
     _this.state = { hiddenIndexes: [] };
+    _this.setContainer = _this.setContainer.bind(_this);
+    _this.handleResize = _this.handleResize.bind(_this);
+    _this.handleWindowResize = _this.handleWindowResize.bind(_this);
     return _this;
   }
 
   _createClass(CollapsibleButtonView, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.remeasure(this.state.hiddenIndexes);
+      var _this2 = this;
+
+      if (this.container) {
+        this.resizeObserver = new _resizeObserverPolyfill2.default(function (entries) {
+          _this2.handleResize(entries[0].contentRect.width);
+        });
+        this.resizeObserver.observe(this.container);
+      } else {
+        this.handleResize(window.innerWidth);
+        window.addEventListener('resize', this.handleWindowResize);
+      }
     }
   }, {
-    key: 'remeasure',
-    value: function remeasure() {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      if (this.container) {
+        this.resizeObserver.disconnect(this.container);
+        this.container = null;
+      } else {
+        window.removeEventListener('resize', this.handleWindowResize);
+      }
+    }
+  }, {
+    key: 'setContainer',
+    value: function setContainer(node) {
+      if (node === null) {
+        return;
+      } // Ref callbacks happen on mount and unmount, element will be null on unmount
+      this.container = this.props.responsiveTo === 'parent' ? node.parentNode : null;
+    }
+  }, {
+    key: 'handleResize',
+    value: function handleResize(width) {
       if (!this.itemSelf) {
         return;
       }
 
       // do calculation here
-      var widthToMeasure = this.itemSelf.clientWidth;
+      var widthToMeasure = width; // this.itemSelf.clientWidth;
       var hiddenIndexes = [];
       var calcWidth = 0;
 
@@ -76,6 +107,11 @@ var CollapsibleButtonView = function (_React$Component) {
       }
     }
   }, {
+    key: 'handleWindowResize',
+    value: function handleWindowResize() {
+      this.handleResize(window.innerWidth);
+    }
+  }, {
     key: 'visibleButtonViews',
     value: function visibleButtonViews(buttonViews) {
       var cleanButtonViews = [];
@@ -89,21 +125,15 @@ var CollapsibleButtonView = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var cleanButtonViews = this.visibleButtonViews(this.props.buttonViews);
       return _react2.default.createElement(
-        _reactMeasure2.default,
-        { onMeasure: function onMeasure(dimensions) {
-            _this2.setState({ hiddenIndexes: [] });_this2.remeasure(dimensions);
-          } },
-        _react2.default.createElement(
-          'div',
-          { ref: function ref(a) {
-              _this2.itemSelf = a;
-            }, className: 'terra-Frame' },
-          cleanButtonViews
-        )
+        'div',
+        { ref: function ref(a) {
+            _this3.itemSelf = a;
+          }, className: 'terra-CollapsibleButtonView' },
+        cleanButtonViews
       );
     }
   }]);

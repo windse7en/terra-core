@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Measure from 'react-measure';
+import ResizeObserver from 'resize-observer-polyfill';
 import './CollapsibleButtonView.scss';
 
 const propTypes = {
@@ -15,19 +15,42 @@ class CollapsibleButtonView extends React.Component {
   constructor(props) {
     super(props);
     this.state = { hiddenIndexes: [] };
+    this.setContainer = this.setContainer.bind(this);
+    this.handleResize = this.handleResize.bind(this);
+    this.handleWindowResize = this.handleWindowResize.bind(this);
   }
 
   componentDidMount() {
-    this.remeasure(this.state.hiddenIndexes);
+    if (this.container) {
+      this.resizeObserver = new ResizeObserver((entries) => { this.handleResize(entries[0].contentRect.width); });
+      this.resizeObserver.observe(this.container);
+    } else {
+      this.handleResize(window.innerWidth);
+      window.addEventListener('resize', this.handleWindowResize);
+    }
   }
 
-  remeasure() {
+  componentWillUnmount() {
+    if (this.container) {
+      this.resizeObserver.disconnect(this.container);
+      this.container = null;
+    } else {
+      window.removeEventListener('resize', this.handleWindowResize);
+    }
+  }
+
+  setContainer(node) {
+    if (node === null) { return; } // Ref callbacks happen on mount and unmount, element will be null on unmount
+    this.container = this.props.responsiveTo === 'parent' ? node.parentNode : null;
+  }
+
+  handleResize(width) {
     if (!this.itemSelf) {
       return;
     }
 
     // do calculation here
-    const widthToMeasure = this.itemSelf.clientWidth;
+    const widthToMeasure = width; // this.itemSelf.clientWidth;
     const hiddenIndexes = [];
     let calcWidth = 0;
 
@@ -46,6 +69,10 @@ class CollapsibleButtonView extends React.Component {
     }
   }
 
+  handleWindowResize() {
+    this.handleResize(window.innerWidth);
+  }
+
   visibleButtonViews(buttonViews) {
     const cleanButtonViews = [];
     for (let i = 0; i < buttonViews.length; i += 1) {
@@ -59,9 +86,7 @@ class CollapsibleButtonView extends React.Component {
   render() {
     const cleanButtonViews = this.visibleButtonViews(this.props.buttonViews);
     return (
-      <Measure onMeasure={(dimensions) => { this.setState({ hiddenIndexes: [] }); this.remeasure(dimensions); }}>
-        <div ref={(a) => { this.itemSelf = a; }} className="terra-Frame">{cleanButtonViews}</div>
-      </Measure>
+      <div ref={(a) => { this.itemSelf = a; }} className="terra-CollapsibleButtonView">{cleanButtonViews}</div>
     );
   }
 }
