@@ -1,14 +1,14 @@
+/*eslint-disable no-debugger*/
+
 import React, { PropTypes } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 import './CollapsibleButtonView.scss';
 
-const propTypes = {
-  buttonViews: PropTypes.arrayOf(PropTypes.element),
-};
+// const propTypes = {
+// };
 
-const defaultProps = {
-  buttonViews: [],
-};
+// const defaultProps = {
+// };
 
 class CollapsibleButtonView extends React.Component {
 
@@ -17,48 +17,45 @@ class CollapsibleButtonView extends React.Component {
     this.state = { hiddenIndexes: [] };
     this.setContainer = this.setContainer.bind(this);
     this.handleResize = this.handleResize.bind(this);
-    this.handleWindowResize = this.handleWindowResize.bind(this);
   }
 
   componentDidMount() {
-    if (this.container) {
-      this.resizeObserver = new ResizeObserver((entries) => { this.handleResize(entries[0].contentRect.width); });
-      this.resizeObserver.observe(this.container);
-    } else {
-      this.handleResize(window.innerWidth);
-      window.addEventListener('resize', this.handleWindowResize);
+    if (this.parentContainer) {
+      this.resizeObserver = new ResizeObserver((entries) => { 
+        this.setState({ hiddenIndexes: [] }); 
+        this.forceUpdate(); 
+        this.handleResize(entries[0].contentRect.width); 
+      });
+      this.resizeObserver.observe(this.parentContainer);
     }
   }
 
   componentWillUnmount() {
-    if (this.container) {
-      this.resizeObserver.disconnect(this.container);
+    if (this.parentContainer) {
+      this.resizeObserver.disconnect(this.parentContainer);
       this.container = null;
-    } else {
-      window.removeEventListener('resize', this.handleWindowResize);
+      this.parentContainer = null;
     }
   }
 
   setContainer(node) {
     if (node === null) { return; } // Ref callbacks happen on mount and unmount, element will be null on unmount
-    this.container = this.props.responsiveTo === 'parent' ? node.parentNode : null;
+    this.container = node;
+    this.parentContainer = node.parentNode;
   }
 
   handleResize(width) {
-    if (!this.itemSelf) {
-      return;
-    }
-
     // do calculation here
-    const widthToMeasure = width; // this.itemSelf.clientWidth;
+    const widthToMeasure = width;
     const hiddenIndexes = [];
     let calcWidth = 0;
 
-    for (let i = 0; i < this.props.buttonViews.length; i += 1) {
-      if (!this.itemSelf.children[i]) {
+    for (let i = 0; i < this.props.children.length; i += 1) {
+      const child = this.container.children[i];
+      if (!child) {
         break;
       }
-      calcWidth += this.itemSelf.children[i].clientWidth;
+      calcWidth += child.getBoundingClientRect().width + 10; // temporary, need to factor in margin
       if (calcWidth > widthToMeasure) {
         hiddenIndexes.push(i);
       }
@@ -69,30 +66,26 @@ class CollapsibleButtonView extends React.Component {
     }
   }
 
-  handleWindowResize() {
-    this.handleResize(window.innerWidth);
-  }
-
-  visibleButtonViews(buttonViews) {
-    const cleanButtonViews = [];
-    for (let i = 0; i < buttonViews.length; i += 1) {
-      if (!this.state.hiddenIndexes.includes(i)) {
-        cleanButtonViews.push(buttonViews[i]);
+  visibleChildComponents(children) {
+    const visibleChildren = [];
+    for (let i = 0; i < children.length; i += 1) {
+      if (this.state.hiddenIndexes.indexOf(i) < 0) {
+        visibleChildren.push(children[i]);
       }
     }
-    return cleanButtonViews;
+    return visibleChildren;
   }
 
   render() {
-    const cleanButtonViews = this.visibleButtonViews(this.props.buttonViews);
+    const visibleChildren = this.visibleChildComponents(this.props.children);
     return (
-      <div ref={(a) => { this.itemSelf = a; }} className="terra-CollapsibleButtonView">{cleanButtonViews}</div>
+      <div className="terra-CollapsibleButtonView" ref={this.setContainer}>{visibleChildren}</div>
     );
   }
 }
 
-CollapsibleButtonView.propTypes = propTypes;
-CollapsibleButtonView.defaultProps = defaultProps;
+// CollapsibleButtonView.propTypes = propTypes;
+// CollapsibleButtonView.defaultProps = defaultProps;
 
 export default CollapsibleButtonView;
 

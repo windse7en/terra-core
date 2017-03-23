@@ -20,6 +20,7 @@ const App = props => (
       <li><Link to="/site/badge">Badge</Link></li>
       <li><Link to="/site/button">Button</Link></li>
       <li><Link to="/site/content">Content</Link></li>
+      <li><Link to="/site/collapsible-button-view">Collpasible Button View</Link></li>
       <li><Link to="/site/grid">Grid</Link></li>
       <li><Link to="/site/i18n">I18n</Link></li>
       <li><Link to="/site/icon">Icon</Link></li>

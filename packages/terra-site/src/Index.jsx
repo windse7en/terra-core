@@ -10,6 +10,7 @@ import ArrangeExamples from './examples/arrange/Index';
 import BadgeExamples from './examples/badge/Index';
 import ButtonExamples from './examples/button/Index';
 import ContentExamples from './examples/content/Index';
+import CollapsibleButtonViewExamples from './examples/collapsible-button-view/Index';
 import GridExamples from './examples/grid/Index';
 import I18nExamples from './examples/i18n/Index';
 import IconExamples from './examples/icon/Index';
@@ -41,6 +42,7 @@ ReactDOM.render((
       <Route path="badge" component={BadgeExamples} />
       <Route path="button" component={ButtonExamples} />
       <Route path="content" component={ContentExamples} />
+      <Route path="collapsible-button-view" component={CollapsibleButtonViewExamples} />
       <Route path="grid" component={GridExamples} />
       <Route path="i18n" component={I18nExamples} />
       <Route path="icon" component={IconExamples} />

@@ -22,15 +22,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*eslint-disable no-debugger*/
 
-var propTypes = {
-  buttonViews: _react.PropTypes.arrayOf(_react.PropTypes.element)
-};
+// const propTypes = {
+// };
 
-var defaultProps = {
-  buttonViews: []
-};
+// const defaultProps = {
+// };
 
 var CollapsibleButtonView = function (_React$Component) {
   _inherits(CollapsibleButtonView, _React$Component);
@@ -43,7 +41,6 @@ var CollapsibleButtonView = function (_React$Component) {
     _this.state = { hiddenIndexes: [] };
     _this.setContainer = _this.setContainer.bind(_this);
     _this.handleResize = _this.handleResize.bind(_this);
-    _this.handleWindowResize = _this.handleWindowResize.bind(_this);
     return _this;
   }
 
@@ -52,24 +49,22 @@ var CollapsibleButtonView = function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      if (this.container) {
+      if (this.parentContainer) {
         this.resizeObserver = new _resizeObserverPolyfill2.default(function (entries) {
+          _this2.setState({ hiddenIndexes: [] });
+          _this2.forceUpdate();
           _this2.handleResize(entries[0].contentRect.width);
         });
-        this.resizeObserver.observe(this.container);
-      } else {
-        this.handleResize(window.innerWidth);
-        window.addEventListener('resize', this.handleWindowResize);
+        this.resizeObserver.observe(this.parentContainer);
       }
     }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      if (this.container) {
-        this.resizeObserver.disconnect(this.container);
+      if (this.parentContainer) {
+        this.resizeObserver.disconnect(this.parentContainer);
         this.container = null;
-      } else {
-        window.removeEventListener('resize', this.handleWindowResize);
+        this.parentContainer = null;
       }
     }
   }, {
@@ -78,25 +73,23 @@ var CollapsibleButtonView = function (_React$Component) {
       if (node === null) {
         return;
       } // Ref callbacks happen on mount and unmount, element will be null on unmount
-      this.container = this.props.responsiveTo === 'parent' ? node.parentNode : null;
+      this.container = node;
+      this.parentContainer = node.parentNode;
     }
   }, {
     key: 'handleResize',
     value: function handleResize(width) {
-      if (!this.itemSelf) {
-        return;
-      }
-
       // do calculation here
-      var widthToMeasure = width; // this.itemSelf.clientWidth;
+      var widthToMeasure = width;
       var hiddenIndexes = [];
       var calcWidth = 0;
 
-      for (var i = 0; i < this.props.buttonViews.length; i += 1) {
-        if (!this.itemSelf.children[i]) {
+      for (var i = 0; i < this.props.children.length; i += 1) {
+        var child = this.container.children[i];
+        if (!child) {
           break;
         }
-        calcWidth += this.itemSelf.children[i].clientWidth;
+        calcWidth += child.getBoundingClientRect().width + 10; // temporary, need to factor in margin
         if (calcWidth > widthToMeasure) {
           hiddenIndexes.push(i);
         }
@@ -107,33 +100,24 @@ var CollapsibleButtonView = function (_React$Component) {
       }
     }
   }, {
-    key: 'handleWindowResize',
-    value: function handleWindowResize() {
-      this.handleResize(window.innerWidth);
-    }
-  }, {
-    key: 'visibleButtonViews',
-    value: function visibleButtonViews(buttonViews) {
-      var cleanButtonViews = [];
-      for (var i = 0; i < buttonViews.length; i += 1) {
-        if (!this.state.hiddenIndexes.includes(i)) {
-          cleanButtonViews.push(buttonViews[i]);
+    key: 'visibleChildComponents',
+    value: function visibleChildComponents(children) {
+      var visibleChildren = [];
+      for (var i = 0; i < children.length; i += 1) {
+        if (this.state.hiddenIndexes.indexOf(i) < 0) {
+          visibleChildren.push(children[i]);
         }
       }
-      return cleanButtonViews;
+      return visibleChildren;
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
-
-      var cleanButtonViews = this.visibleButtonViews(this.props.buttonViews);
+      var visibleChildren = this.visibleChildComponents(this.props.children);
       return _react2.default.createElement(
         'div',
-        { ref: function ref(a) {
-            _this3.itemSelf = a;
-          }, className: 'terra-CollapsibleButtonView' },
-        cleanButtonViews
+        { className: 'terra-CollapsibleButtonView', ref: this.setContainer },
+        visibleChildren
       );
     }
   }]);
@@ -141,7 +125,7 @@ var CollapsibleButtonView = function (_React$Component) {
   return CollapsibleButtonView;
 }(_react2.default.Component);
 
-CollapsibleButtonView.propTypes = propTypes;
-CollapsibleButtonView.defaultProps = defaultProps;
+// CollapsibleButtonView.propTypes = propTypes;
+// CollapsibleButtonView.defaultProps = defaultProps;
 
 exports.default = CollapsibleButtonView;
