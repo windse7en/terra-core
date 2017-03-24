@@ -14,7 +14,8 @@ The Terra CollapsibleButtonView is a container that adjusts the visibility butto
 import React from 'react';
 import CollapsibleButtonView from 'terra-collapsible-button-view';
 
-<CollapsibleButtonView
-  buttonViews={[<Button />, <Button />]}
-/>
+<CollapsibleButtonView>
+  <Button />
+  <Button />
+</CollapsibleButtonView>
 ```
