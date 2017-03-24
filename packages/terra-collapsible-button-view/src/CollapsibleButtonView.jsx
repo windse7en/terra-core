@@ -55,7 +55,7 @@ class CollapsibleButtonView extends React.Component {
       if (!child) {
         break;
       }
-      calcWidth += child.getBoundingClientRect().width + 10; // temporary, need to factor in margin
+      calcWidth += child.getBoundingClientRect().width;
       if (calcWidth > widthToMeasure) {
         hiddenIndexes.push(i);
       }
@@ -79,7 +79,16 @@ class CollapsibleButtonView extends React.Component {
   render() {
     const visibleChildren = this.visibleChildComponents(this.props.children);
     return (
-      <div className="terra-CollapsibleButtonView" ref={this.setContainer}>{visibleChildren}</div>
+      <div className="terra-CollapsibleButtonView" ref={this.setContainer}>
+        {visibleChildren.map((child, childIndex) => {
+          const childKey = childIndex;
+          return (
+            <div className="terra-CollapsibleButtonView-item" key={childKey}>
+              {child}
+            </div>
+          );
+        })}
+      </div>
     );
   }
 }

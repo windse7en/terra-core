@@ -4,7 +4,14 @@
 
 .terra-CollapsibleButtonView {
   background: $terra-grey-20;
+  display: flex;
+  flex-wrap: nowrap;
   overflow-x: hidden;
   position: relative;
   width: 100%;
+}
+
+.terra-CollapsibleButtonView-item {
+  flex: 0 0 auto;
+  overflow: hidden;
 }

@@ -89,7 +89,7 @@ var CollapsibleButtonView = function (_React$Component) {
         if (!child) {
           break;
         }
-        calcWidth += child.getBoundingClientRect().width + 10; // temporary, need to factor in margin
+        calcWidth += child.getBoundingClientRect().width;
         if (calcWidth > widthToMeasure) {
           hiddenIndexes.push(i);
         }
@@ -117,7 +117,14 @@ var CollapsibleButtonView = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: 'terra-CollapsibleButtonView', ref: this.setContainer },
-        visibleChildren
+        visibleChildren.map(function (child, childIndex) {
+          var childKey = childIndex;
+          return _react2.default.createElement(
+            'div',
+            { className: 'terra-CollapsibleButtonView-item', key: childKey },
+            child
+          );
+        })
       );
     }
   }]);
