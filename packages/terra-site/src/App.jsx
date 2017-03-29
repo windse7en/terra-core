@@ -23,6 +23,7 @@ const App = props => (
       <li><Link to="/site/content">Content</Link></li>
       <li><Link to="/site/detail-view">Detail View</Link></li>
       <li><Link to="/site/grid">Grid</Link></li>
+      <li><Link to="/site/header">Header</Link></li>
       <li><Link to="/site/i18n">I18n</Link></li>
       <li><Link to="/site/icon">Icon</Link></li>
       <li><Link to="/site/image">Image</Link></li>

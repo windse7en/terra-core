@@ -13,6 +13,7 @@ import ClinicalItemViewExamples from './examples/clinical-item-view/Index';
 import ContentExamples from './examples/content/Index';
 import DetailViewExamples from './examples/detail-view/Index';
 import GridExamples from './examples/grid/Index';
+import HeaderExamples from './examples/header/Index';
 import I18nExamples from './examples/i18n/Index';
 import IconExamples from './examples/icon/Index';
 import ImageExamples from './examples/image/Index';
@@ -35,6 +36,7 @@ import SlidePanelTestRoutes from 'terra-slide-panel/tests/nightwatch/SlidePanelT
 import ClinicalItemViewTestRoutes from 'terra-clinical-item-view/tests/nightwatch/clinical-item-view/ClinicalItemViewTestRoutes';
 import CommentTestRoutes from 'terra-clinical-item-view/tests/nightwatch/comment/CommentTestRoutes';
 import DisplayTestRoutes from 'terra-clinical-item-view/tests/nightwatch/display/DisplayTestRoutes';
+import HeaderTestRoutes from 'terra-header/tests/nightwatch/display/HeaderTestRoutes';
 import ListTestRoutes from 'terra-list/tests/nightwatch/list/ListTestRoutes';
 import ListItemTestRoutes from 'terra-list/tests/nightwatch/list-item/ListItemTestRoutes';
 import SingleSelectListTestRoutes from 'terra-list/tests/nightwatch/single-select-list/SingleSelectListTestRoutes';
@@ -55,6 +57,7 @@ ReactDOM.render((
       <Route path="content" component={ContentExamples} />
       <Route path="detail-view" component={DetailViewExamples} />
       <Route path="grid" component={GridExamples} />
+      <Route path="header" component={HeaderExamples} />
       <Route path="i18n" component={I18nExamples} />
       <Route path="icon" component={IconExamples} />
       <Route path="image" component={ImageExamples} />
@@ -80,5 +83,6 @@ ReactDOM.render((
     {ListItemTestRoutes}
     {SingleSelectListTestRoutes}
     {MultiSelectListTestRoutes}
+    {HeaderTestRoutes}
   </Router>
 ), document.getElementById('root'));
