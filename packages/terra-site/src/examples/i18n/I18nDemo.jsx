@@ -3,6 +3,9 @@ import { FormattedMessage } from 'react-intl';
 
 import { I18nProvider, i18nLoader } from 'terra-i18n';
 
+import SecondProvider from './SecondProvider';
+import ThirdProvider from './ThirdProvider';
+
 class Demo extends React.Component {
   constructor(props) {
     super(props);
@@ -33,6 +36,8 @@ class Demo extends React.Component {
       >
         <FormattedMessage id="Terra.ajax.error" />
         <label htmlFor="locale"> Current locale: {this.state.locale} </label>
+        <SecondProvider locale={this.state.locale} messages={this.state.messages} />
+        <ThirdProvider />
         <select onChange={this.handleLocaleChange}>
           <option value="en">en</option>
           <option value="en-GB">en-GB</option>
