@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _GridRow = require('./GridRow');
 
 var _GridRow2 = _interopRequireDefault(_GridRow);
@@ -24,7 +28,7 @@ var propTypes = {
   /**
    * The component that will be displayed at row level.
    */
-  children: _react.PropTypes.node.isRequired
+  children: _propTypes2.default.node.isRequired
 };
 
 var Grid = function Grid(props) {

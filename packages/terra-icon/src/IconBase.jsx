@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 // eslint-disable-next-line import/no-unresolved, import/no-webpack-loader-syntax
 import './Icon.scss';

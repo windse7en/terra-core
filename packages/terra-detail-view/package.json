@@ -26,6 +26,7 @@
     "terra-grid": "^2.0.0"
   },
   "peerDependencies": {
+    "prop-types": "^15.5.7",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "terra-base": "^0.x",

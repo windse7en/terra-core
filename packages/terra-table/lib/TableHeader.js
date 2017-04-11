@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _TableHeaderContent = require('./TableHeaderContent');
 
 var _TableHeaderContent2 = _interopRequireDefault(_TableHeaderContent);
@@ -20,15 +24,15 @@ var propTypes = {
   /**
    * The children passed to the component
    */
-  children: _react.PropTypes.node.isRequired,
+  children: _propTypes2.default.node.isRequired,
   /**
    * A callback function for onClick action
    */
-  onClick: _react.PropTypes.func,
+  onClick: _propTypes2.default.func,
   /**
    * The maximum height for the header in a table
    */
-  height: _react.PropTypes.oneOf(['tiny', 'small', 'medium', 'large', 'huge'])
+  height: _propTypes2.default.oneOf(['tiny', 'small', 'medium', 'large', 'huge'])
 };
 
 var defaultProps = {

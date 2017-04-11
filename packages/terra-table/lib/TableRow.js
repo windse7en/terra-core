@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -26,19 +30,19 @@ var propTypes = {
   /**
    * The children passed to the component
    */
-  children: _react.PropTypes.node,
+  children: _propTypes2.default.node,
   /**
    * Whether or not row is selected
    */
-  isSelected: _react.PropTypes.bool,
+  isSelected: _propTypes2.default.bool,
   /**
    * The maximum height for the row in a table
    */
-  height: _react.PropTypes.oneOf(['tiny', 'small', 'medium', 'large', 'huge']),
+  height: _propTypes2.default.oneOf(['tiny', 'small', 'medium', 'large', 'huge']),
   /**
    * Whether or not row is selectable
    */
-  isSelectable: _react.PropTypes.bool
+  isSelectable: _propTypes2.default.bool
 };
 
 var defaultProps = {
