@@ -1,21 +1,16 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import PropsTable from 'terra-props-table';
 import Markdown from 'terra-markdown';
 import ReadMe from 'terra-list/docs/README.md';
+import { version } from 'terra-list/package.json';
 
 // Component Source
-// eslint-disable-next-line import/no-webpack-loader-syntax, import/first, import/no-unresolved, import/extensions
+/* eslint-disable import/no-webpack-loader-syntax, import/first, import/no-unresolved, import/extensions */
 import ListItemSrc from '!raw-loader!terra-list/src/ListItem.jsx';
-// Component Source
-// eslint-disable-next-line import/no-webpack-loader-syntax, import/first, import/no-unresolved, import/extensions
 import ListSrc from '!raw-loader!terra-list/src/List.jsx';
-// Component Source
-// eslint-disable-next-line import/no-webpack-loader-syntax, import/first, import/no-unresolved, import/extensions
 import SingleSelectListSrc from '!raw-loader!terra-list/src/SingleSelectList.jsx';
-// Component Source
-// eslint-disable-next-line import/no-webpack-loader-syntax, import/first, import/no-unresolved, import/extensions
 import MultiSelectListSrc from '!raw-loader!terra-list/src/MultiSelectList.jsx';
+/* eslint-enable import/no-webpack-loader-syntax, import/first, import/no-unresolved, import/extensions */
 
 // Example Files
 import ListDemo from './ListDemo';
@@ -24,6 +19,7 @@ import MultiSelectListDemo from './MultiSelectListDemo';
 
 const ListExamples = () => (
   <div>
+    <div id="version">Version: {version}</div>
     <Markdown id="readme" src={ReadMe} />
     <PropsTable id="props-listItem" src={ListItemSrc} />
     <PropsTable id="props-list" src={ListSrc} />

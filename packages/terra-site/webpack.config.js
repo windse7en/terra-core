@@ -36,7 +36,7 @@ module.exports = {
     ],
   },
   sassLoader: {
-    data: `@import "${path.resolve(path.join(__dirname, 'node_modules/terra-legacy-theme/src/LegacyTheme.scss'))}"; @import "${path.resolve(path.join(__dirname, 'node_modules/terra-application/src/Application.scss'))}"; $terra-bidi: true;`,
+    data: `@import "${path.resolve(path.join(__dirname, 'node_modules/terra-legacy-theme/src/LegacyTheme.scss'))}"; $terra-bidi: true;`,
   },
   plugins: [
     new ExtractTextPlugin('[name]-[hash].css'),
@@ -58,6 +58,9 @@ module.exports = {
   ],
   resolve: {
     extensions: ['', '.js', '.jsx'],
+
+    // See https://github.com/facebook/react/issues/8026
+    alias: { react: path.resolve(__dirname, 'node_modules', 'react') },
   },
   output: {
     filename: '[name].js',
