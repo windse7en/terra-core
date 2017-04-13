@@ -22,6 +22,14 @@ var _terraButton = require('terra-button');
 
 var _terraButton2 = _interopRequireDefault(_terraButton);
 
+var _CollapsibleButtonItem = require('./CollapsibleButtonItem');
+
+var _CollapsibleButtonItem2 = _interopRequireDefault(_CollapsibleButtonItem);
+
+var _CollapsibleButtonGroup = require('./CollapsibleButtonGroup');
+
+var _CollapsibleButtonGroup2 = _interopRequireDefault(_CollapsibleButtonGroup);
+
 require('./CollapsibleButtonView.scss');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -171,7 +179,7 @@ var CollapsibleButtonView = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'terra-CollapsibleButtonView', ref: this.setContainer },
+        { className: 'terra-CollapsibleButtonView' },
         _react2.default.createElement(
           'div',
           { className: 'terra-CollapsibleButtonView-container', ref: this.setContainer },
@@ -194,7 +202,7 @@ var CollapsibleButtonView = function (_React$Component) {
 
 CollapsibleButtonView.propTypes = propTypes;
 CollapsibleButtonView.defaultProps = defaultProps;
-CollapsibleButtonView.Item = Item;
-CollapsibleButtonView.Group = Group;
+CollapsibleButtonView.Item = _CollapsibleButtonItem2.default;
+CollapsibleButtonView.Group = _CollapsibleButtonGroup2.default;
 
 exports.default = CollapsibleButtonView;

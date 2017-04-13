@@ -4,6 +4,8 @@ import React, { PropTypes } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 import classNames from 'classnames';
 import Button from 'terra-button';
+import Item from './CollapsibleButtonItem';
+import Group from './CollapsibleButtonGroup';
 import './CollapsibleButtonView.scss';
 
 const propTypes = {
@@ -123,7 +125,7 @@ class CollapsibleButtonView extends React.Component {
     }
 
     return (
-      <div className="terra-CollapsibleButtonView" ref={this.setContainer}>
+      <div className="terra-CollapsibleButtonView">
         <div className="terra-CollapsibleButtonView-container" ref={this.setContainer}>
           {visibleChildren.map((child, childIndex) => {
             const childKey = childIndex;
