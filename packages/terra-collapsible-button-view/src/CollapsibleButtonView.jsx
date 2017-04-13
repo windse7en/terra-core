@@ -2,13 +2,24 @@
 
 import React, { PropTypes } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
+import Button from 'terra-button';
 import './CollapsibleButtonView.scss';
 
-// const propTypes = {
-// };
+const propTypes = {
+  /**
+   * The children to be placed within the button view.
+   */
+  children: PropTypes.node,
+  /**
+   * The children to be placed within the button view.
+   */
+  alignment: PropTypes.oneOf(['alignStart', 'alignEnd']),
+};
 
-// const defaultProps = {
-// };
+const defaultProps = {
+  children: undefined,
+  alignment: 'alignStart',
+};
 
 class CollapsibleButtonView extends React.Component {
 
@@ -17,6 +28,8 @@ class CollapsibleButtonView extends React.Component {
     this.state = { hiddenIndexes: [] };
     this.setContainer = this.setContainer.bind(this);
     this.handleResize = this.handleResize.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
+    this.toggleButton = <Button text="" onClick={this.handleToggle} ref={this.setButtonNode} />;
   }
 
   componentDidMount() {
@@ -44,6 +57,19 @@ class CollapsibleButtonView extends React.Component {
     this.parentContainer = node.parentNode;
   }
 
+  setButtonNode(node) {
+    if (node === null) { return; } // Ref callbacks happen on mount and unmount, element will be null on unmount
+    this.buttonNode = node;
+  }
+
+  handleToggle() {
+    if (this.state.toggleOpen) {
+      this.handleResize(this.parentNode.getBoundingClientRect().width);
+    } else {
+      this.setState({ toggleOpen: true, hiddenIndexes: [] });
+    }
+  }
+
   handleResize(width) {
     // do calculation here
     const widthToMeasure = width;
@@ -62,7 +88,7 @@ class CollapsibleButtonView extends React.Component {
     }
 
     if (hiddenIndexes.length !== this.state.hiddenIndexes.length) {
-      this.setState({ hiddenIndexes });
+      this.setState({ toggleOpen: false, hiddenIndexes });
     }
   }
 
@@ -77,7 +103,17 @@ class CollapsibleButtonView extends React.Component {
   }
 
   render() {
-    const visibleChildren = this.visibleChildComponents(this.props.children);
+    const { children,
+            alignment,
+            ...customProps } = this.props;
+
+    const listClassNames = classNames([
+        'terra-CollapsibleButtonView',
+        { [`terra-CollapsibleButtonView-${alignment}`]: alignment },
+        customProps.className,
+      ]);
+
+    const visibleChildren = this.visibleChildComponents(children);
     return (
       <div className="terra-CollapsibleButtonView" ref={this.setContainer}>
         {visibleChildren.map((child, childIndex) => {
@@ -93,8 +129,8 @@ class CollapsibleButtonView extends React.Component {
   }
 }
 
-// CollapsibleButtonView.propTypes = propTypes;
-// CollapsibleButtonView.defaultProps = defaultProps;
+CollapsibleButtonView.propTypes = propTypes;
+CollapsibleButtonView.defaultProps = defaultProps;
 
 export default CollapsibleButtonView;
 

@@ -14,9 +14,17 @@ var _resizeObserverPolyfill = require('resize-observer-polyfill');
 
 var _resizeObserverPolyfill2 = _interopRequireDefault(_resizeObserverPolyfill);
 
+var _terraButton = require('terra-button');
+
+var _terraButton2 = _interopRequireDefault(_terraButton);
+
 require('./CollapsibleButtonView.scss');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -24,11 +32,21 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /*eslint-disable no-debugger*/
 
-// const propTypes = {
-// };
+var propTypes = {
+  /**
+   * The children to be placed within the button view.
+   */
+  children: _react.PropTypes.node,
+  /**
+   * The children to be placed within the button view.
+   */
+  alignment: _react.PropTypes.oneOf(['alignStart', 'alignEnd'])
+};
 
-// const defaultProps = {
-// };
+var defaultProps = {
+  children: undefined,
+  alignment: 'alignStart'
+};
 
 var CollapsibleButtonView = function (_React$Component) {
   _inherits(CollapsibleButtonView, _React$Component);
@@ -41,6 +59,8 @@ var CollapsibleButtonView = function (_React$Component) {
     _this.state = { hiddenIndexes: [] };
     _this.setContainer = _this.setContainer.bind(_this);
     _this.handleResize = _this.handleResize.bind(_this);
+    _this.handleToggle = _this.handleToggle.bind(_this);
+    _this.toggleButton = _react2.default.createElement(_terraButton2.default, { text: '', onClick: _this.handleToggle, ref: _this.setButtonNode });
     return _this;
   }
 
@@ -77,6 +97,23 @@ var CollapsibleButtonView = function (_React$Component) {
       this.parentContainer = node.parentNode;
     }
   }, {
+    key: 'setButtonNode',
+    value: function setButtonNode(node) {
+      if (node === null) {
+        return;
+      } // Ref callbacks happen on mount and unmount, element will be null on unmount
+      this.buttonNode = node;
+    }
+  }, {
+    key: 'handleToggle',
+    value: function handleToggle() {
+      if (this.state.toggleOpen) {
+        this.handleResize(this.parentNode.getBoundingClientRect().width);
+      } else {
+        this.setState({ toggleOpen: true, hiddenIndexes: [] });
+      }
+    }
+  }, {
     key: 'handleResize',
     value: function handleResize(width) {
       // do calculation here
@@ -96,7 +133,7 @@ var CollapsibleButtonView = function (_React$Component) {
       }
 
       if (hiddenIndexes.length !== this.state.hiddenIndexes.length) {
-        this.setState({ hiddenIndexes: hiddenIndexes });
+        this.setState({ toggleOpen: false, hiddenIndexes: hiddenIndexes });
       }
     }
   }, {
@@ -113,7 +150,14 @@ var CollapsibleButtonView = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var visibleChildren = this.visibleChildComponents(this.props.children);
+      var _props = this.props,
+          children = _props.children,
+          alignment = _props.alignment,
+          customProps = _objectWithoutProperties(_props, ['children', 'alignment']);
+
+      var listClassNames = classNames(['terra-CollapsibleButtonView', _defineProperty({}, 'terra-CollapsibleButtonView-' + alignment, alignment), customProps.className]);
+
+      var visibleChildren = this.visibleChildComponents(children);
       return _react2.default.createElement(
         'div',
         { className: 'terra-CollapsibleButtonView', ref: this.setContainer },
@@ -132,7 +176,7 @@ var CollapsibleButtonView = function (_React$Component) {
   return CollapsibleButtonView;
 }(_react2.default.Component);
 
-// CollapsibleButtonView.propTypes = propTypes;
-// CollapsibleButtonView.defaultProps = defaultProps;
+CollapsibleButtonView.propTypes = propTypes;
+CollapsibleButtonView.defaultProps = defaultProps;
 
 exports.default = CollapsibleButtonView;
