@@ -4,6 +4,7 @@
 
 .terra-CollapsibleButtonView {
   display: flex;
+  justify-content: space-between;
   position: relative;
   width: 100%;
 }
@@ -13,7 +14,6 @@
   display: flex;
   flex: 1 1 auto;
   flex-wrap: nowrap;
-  justify-content: space-between;
   overflow-x: hidden;
   position: relative;
   width: 100%;

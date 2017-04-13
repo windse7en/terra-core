@@ -112,5 +112,5 @@ class CollapsibleButtonGroup extends React.Component {
 CollapsibleButtonGroup.propTypes = propTypes;
 CollapsibleButtonGroup.defaultProps = defaultProps;
 
-export default ButtonGroup;
+export default CollapsibleButtonGroup;
 

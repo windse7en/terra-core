@@ -166,4 +166,4 @@ var CollapsibleButtonGroup = function (_React$Component) {
 CollapsibleButtonGroup.propTypes = propTypes;
 CollapsibleButtonGroup.defaultProps = defaultProps;
 
-exports.default = ButtonGroup;
+exports.default = CollapsibleButtonGroup;

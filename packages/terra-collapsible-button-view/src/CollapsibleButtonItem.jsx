@@ -50,4 +50,4 @@ const CollapsibleButtonItem = ({ isSelected, ...customProps }) => {
 CollapsibleButtonItem.propTypes = propTypes;
 CollapsibleButtonItem.defaultProps = defaultProps;
 
-export default ButtonGroupButton;
+export default CollapsibleButtonItem;

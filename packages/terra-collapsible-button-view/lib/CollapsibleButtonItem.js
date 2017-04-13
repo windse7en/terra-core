@@ -64,4 +64,4 @@ var CollapsibleButtonItem = function CollapsibleButtonItem(_ref) {
 CollapsibleButtonItem.propTypes = propTypes;
 CollapsibleButtonItem.defaultProps = defaultProps;
 
-exports.default = ButtonGroupButton;
+exports.default = CollapsibleButtonItem;

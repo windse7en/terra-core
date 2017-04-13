@@ -72,7 +72,7 @@ var CollapsibleButtonView = function (_React$Component) {
     _this.setContainer = _this.setContainer.bind(_this);
     _this.handleResize = _this.handleResize.bind(_this);
     _this.handleToggle = _this.handleToggle.bind(_this);
-    _this.toggleButton = _react2.default.createElement(_terraButton2.default, { text: '\u2026', onClick: _this.handleToggle, ref: _this.setButtonNode });
+    _this.toggleButton = _react2.default.createElement(_terraButton2.default, { text: '\u2026', onClick: _this.handleToggle });
     return _this;
   }
 
@@ -81,22 +81,21 @@ var CollapsibleButtonView = function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      if (this.parentContainer) {
+      if (this.container) {
         this.resizeObserver = new _resizeObserverPolyfill2.default(function (entries) {
           _this2.setState({ hiddenIndexes: [] });
           _this2.forceUpdate();
           _this2.handleResize(entries[0].contentRect.width);
         });
-        this.resizeObserver.observe(this.parentContainer);
+        this.resizeObserver.observe(this.container);
       }
     }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      if (this.parentContainer) {
-        this.resizeObserver.disconnect(this.parentContainer);
+      if (this.container) {
+        this.resizeObserver.disconnect(this.container);
         this.container = null;
-        this.parentContainer = null;
       }
     }
   }, {
@@ -106,15 +105,6 @@ var CollapsibleButtonView = function (_React$Component) {
         return;
       } // Ref callbacks happen on mount and unmount, element will be null on unmount
       this.container = node;
-      this.parentContainer = node.parentNode;
-    }
-  }, {
-    key: 'setButtonNode',
-    value: function setButtonNode(node) {
-      if (node === null) {
-        return;
-      } // Ref callbacks happen on mount and unmount, element will be null on unmount
-      this.buttonNode = node;
     }
   }, {
     key: 'handleToggle',
@@ -158,6 +148,16 @@ var CollapsibleButtonView = function (_React$Component) {
         }
       }
       return visibleChildren;
+    }
+  }, {
+    key: 'hiddenChildComponents',
+    value: function hiddenChildComponents(children) {
+      var indexes = this.state.hiddenIndexes;
+      var hiddenChildren = [];
+      for (var i = 0; i < indexes.length; i += 1) {
+        hiddenChildren.push(children[indexes[i]]);
+      }
+      return hiddenChildren;
     }
   }, {
     key: 'render',

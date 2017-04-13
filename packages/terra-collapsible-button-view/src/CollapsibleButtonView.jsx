@@ -32,37 +32,30 @@ class CollapsibleButtonView extends React.Component {
     this.setContainer = this.setContainer.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
-    this.toggleButton = <Button text="…" onClick={this.handleToggle} ref={this.setButtonNode} />;
+    this.toggleButton = <Button text="…" onClick={this.handleToggle} />;
   }
 
   componentDidMount() {
-    if (this.parentContainer) {
+    if (this.container) {
       this.resizeObserver = new ResizeObserver((entries) => { 
         this.setState({ hiddenIndexes: [] }); 
         this.forceUpdate(); 
         this.handleResize(entries[0].contentRect.width); 
       });
-      this.resizeObserver.observe(this.parentContainer);
+      this.resizeObserver.observe(this.container);
     }
   }
 
   componentWillUnmount() {
-    if (this.parentContainer) {
-      this.resizeObserver.disconnect(this.parentContainer);
+    if (this.container) {
+      this.resizeObserver.disconnect(this.container);
       this.container = null;
-      this.parentContainer = null;
     }
   }
 
   setContainer(node) {
     if (node === null) { return; } // Ref callbacks happen on mount and unmount, element will be null on unmount
     this.container = node;
-    this.parentContainer = node.parentNode;
-  }
-
-  setButtonNode(node) {
-    if (node === null) { return; } // Ref callbacks happen on mount and unmount, element will be null on unmount
-    this.buttonNode = node;
   }
 
   handleToggle() {
@@ -103,6 +96,15 @@ class CollapsibleButtonView extends React.Component {
       }
     }
     return visibleChildren;
+  }
+
+  hiddenChildComponents(children) {
+    const indexes = this.state.hiddenIndexes;
+    const hiddenChildren = [];
+    for (let i = 0; i < indexes.length; i += 1) {
+      hiddenChildren.push(children[indexes[i]]);
+    }
+    return hiddenChildren;
   }
 
   render() {
