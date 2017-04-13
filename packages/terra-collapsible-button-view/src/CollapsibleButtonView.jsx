@@ -2,6 +2,7 @@
 
 import React, { PropTypes } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
+import classNames from 'classnames';
 import Button from 'terra-button';
 import './CollapsibleButtonView.scss';
 

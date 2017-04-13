@@ -56,6 +56,7 @@ ReactDOM.render((
       <Route path="button" component={ButtonExamples} />
       <Route path="button-group" component={ButtonGroupExamples} />
       <Route path="content" component={ContentExamples} />
+      <Route path="collapsible-button-view" component={CollapsibleButtonViewExamples} />
       <Route path="datepicker" component={DatePickerExamples} />
       <Route path="grid" component={GridExamples} />
       <Route path="i18n" component={I18nExamples} />

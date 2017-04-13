@@ -14,6 +14,10 @@ var _resizeObserverPolyfill = require('resize-observer-polyfill');
 
 var _resizeObserverPolyfill2 = _interopRequireDefault(_resizeObserverPolyfill);
 
+var _classnames = require('classnames');
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
 var _terraButton = require('terra-button');
 
 var _terraButton2 = _interopRequireDefault(_terraButton);
@@ -155,7 +159,7 @@ var CollapsibleButtonView = function (_React$Component) {
           alignment = _props.alignment,
           customProps = _objectWithoutProperties(_props, ['children', 'alignment']);
 
-      var listClassNames = classNames(['terra-CollapsibleButtonView', _defineProperty({}, 'terra-CollapsibleButtonView-' + alignment, alignment), customProps.className]);
+      var listClassNames = (0, _classnames2.default)(['terra-CollapsibleButtonView', _defineProperty({}, 'terra-CollapsibleButtonView-' + alignment, alignment), customProps.className]);
 
       var visibleChildren = this.visibleChildComponents(children);
       return _react2.default.createElement(
