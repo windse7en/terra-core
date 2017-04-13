@@ -30,7 +30,7 @@ class CollapsibleButtonView extends React.Component {
     this.setContainer = this.setContainer.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
-    this.toggleButton = <Button text="" onClick={this.handleToggle} ref={this.setButtonNode} />;
+    this.toggleButton = <Button text="…" onClick={this.handleToggle} ref={this.setButtonNode} />;
   }
 
   componentDidMount() {
@@ -115,16 +115,26 @@ class CollapsibleButtonView extends React.Component {
       ]);
 
     const visibleChildren = this.visibleChildComponents(children);
+    const hiddenChildren = this.hiddenChildComponents(children);
+
+    let toggle;
+    if (hiddenChildren.length > 0) {
+      toggle = this.toggleButton;
+    }
+
     return (
       <div className="terra-CollapsibleButtonView" ref={this.setContainer}>
-        {visibleChildren.map((child, childIndex) => {
-          const childKey = childIndex;
-          return (
-            <div className="terra-CollapsibleButtonView-item" key={childKey}>
-              {child}
-            </div>
-          );
-        })}
+        <div className="terra-CollapsibleButtonView-container" ref={this.setContainer}>
+          {visibleChildren.map((child, childIndex) => {
+            const childKey = childIndex;
+            return (
+              <div className="terra-CollapsibleButtonView-item" key={childKey}>
+                {child}
+              </div>
+            );
+          })}
+        </div>
+        {toggle}
       </div>
     );
   }
@@ -132,6 +142,8 @@ class CollapsibleButtonView extends React.Component {
 
 CollapsibleButtonView.propTypes = propTypes;
 CollapsibleButtonView.defaultProps = defaultProps;
+CollapsibleButtonView.Item = Item;
+CollapsibleButtonView.Group = Group;
 
 export default CollapsibleButtonView;
 

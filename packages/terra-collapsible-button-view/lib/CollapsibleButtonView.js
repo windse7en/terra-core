@@ -64,7 +64,7 @@ var CollapsibleButtonView = function (_React$Component) {
     _this.setContainer = _this.setContainer.bind(_this);
     _this.handleResize = _this.handleResize.bind(_this);
     _this.handleToggle = _this.handleToggle.bind(_this);
-    _this.toggleButton = _react2.default.createElement(_terraButton2.default, { text: '', onClick: _this.handleToggle, ref: _this.setButtonNode });
+    _this.toggleButton = _react2.default.createElement(_terraButton2.default, { text: '\u2026', onClick: _this.handleToggle, ref: _this.setButtonNode });
     return _this;
   }
 
@@ -162,17 +162,29 @@ var CollapsibleButtonView = function (_React$Component) {
       var listClassNames = (0, _classnames2.default)(['terra-CollapsibleButtonView', _defineProperty({}, 'terra-CollapsibleButtonView-' + alignment, alignment), customProps.className]);
 
       var visibleChildren = this.visibleChildComponents(children);
+      var hiddenChildren = this.hiddenChildComponents(children);
+
+      var toggle = void 0;
+      if (hiddenChildren.length > 0) {
+        toggle = this.toggleButton;
+      }
+
       return _react2.default.createElement(
         'div',
         { className: 'terra-CollapsibleButtonView', ref: this.setContainer },
-        visibleChildren.map(function (child, childIndex) {
-          var childKey = childIndex;
-          return _react2.default.createElement(
-            'div',
-            { className: 'terra-CollapsibleButtonView-item', key: childKey },
-            child
-          );
-        })
+        _react2.default.createElement(
+          'div',
+          { className: 'terra-CollapsibleButtonView-container', ref: this.setContainer },
+          visibleChildren.map(function (child, childIndex) {
+            var childKey = childIndex;
+            return _react2.default.createElement(
+              'div',
+              { className: 'terra-CollapsibleButtonView-item', key: childKey },
+              child
+            );
+          })
+        ),
+        toggle
       );
     }
   }]);
@@ -182,5 +194,7 @@ var CollapsibleButtonView = function (_React$Component) {
 
 CollapsibleButtonView.propTypes = propTypes;
 CollapsibleButtonView.defaultProps = defaultProps;
+CollapsibleButtonView.Item = Item;
+CollapsibleButtonView.Group = Group;
 
 exports.default = CollapsibleButtonView;
