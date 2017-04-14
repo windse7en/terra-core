@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Base from '../../lib/Base';
+import { BaseStyles as Base } from '../../lib/Base';
 
 
 const BaseDefault = () => (

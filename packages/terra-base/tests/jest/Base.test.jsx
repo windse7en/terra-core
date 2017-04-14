@@ -1,5 +1,5 @@
 import React from 'react';
-import Base from '../../src/Base';
+import { BaseStyles as Base } from '../../src/Base';
 
 // Snapshot Tests
 it('should support rendering a string as children', () => {

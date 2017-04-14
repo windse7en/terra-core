@@ -12,12 +12,8 @@ const App = () => (
     locale="en"
     customMessages={customMessages}
   >
-    <p>
-      <FormattedMessage id="Terra.isInIntlBase" />
-    </p>
-    <p>
-      <FormattedMessage id="Terra.ajax.error" />
-    </p>
+    <p><FormattedMessage id="Terra.isInIntlBase" /></p>
+    <p><FormattedMessage id="Terra.ajax.error" /></p>
   </IntlBase>
 );
 

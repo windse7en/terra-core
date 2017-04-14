@@ -25,7 +25,7 @@ import StandoutExamples from './examples/standout/Index';
 import StatusExamples from './examples/status/Index';
 import TableExamples from './examples/table/Index';
 import TitleExamples from './examples/title/Index';
-import IntlBaseExamples from './examples/intlBase/index';
+import IntlBaseExamples from './examples/intlBase/IntlBaseDemo';
 
 
 // Test
