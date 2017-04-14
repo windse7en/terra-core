@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import Base from 'terra-base';
+import { BaseStyles as Base } from 'terra-base';
 import React from 'react';
 import { Link } from 'react-router';
 import './site.scss';
@@ -36,6 +36,7 @@ const App = props => (
       <li><Link to="/site/status">Status</Link></li>
       <li><Link to="/site/table">Table</Link></li>
       <li><Link to="/site/title">Title</Link></li>
+      <li><Link to="/site/intlBase">IntlBase</Link></li>
       <li><Link to="/tests">Tests</Link></li>
     </ul>
     {props.children}

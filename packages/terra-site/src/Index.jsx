@@ -25,6 +25,7 @@ import StandoutExamples from './examples/standout/Index';
 import StatusExamples from './examples/status/Index';
 import TableExamples from './examples/table/Index';
 import TitleExamples from './examples/title/Index';
+import IntlBaseExamples from './examples/intlBase/index';
 
 
 // Test
@@ -69,6 +70,7 @@ ReactDOM.render((
       <Route path="status" component={StatusExamples} />
       <Route path="title" component={TitleExamples} />
       <Route path="table" component={TableExamples} />
+      <Route path="intlBase" component={IntlBaseExamples} />
     </Route>
     <Route path="/tests" component={TestLinks} />
     {BaseTestRoutes}
