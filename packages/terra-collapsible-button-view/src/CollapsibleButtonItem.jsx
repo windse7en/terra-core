@@ -35,16 +35,23 @@ const defaultProps = {
   isReversed: false,
 };
 
-
-
-const CollapsibleButtonItem = ({ isSelected, ...customProps }) => {
+const CollapsibleButtonItem = ({ 
+  isSelected, 
+  text, 
+  icon, 
+  isReversed, 
+  ...customProps, 
+}) => {
   const buttonClassName = classNames([
     'terra-CollapsibleButtonItem',
     { 'terra-CollapsibleButtonItem--selected': isSelected },
     customProps.className,
   ]);
 
-  return (<div {...customProps} aria-selected={isSelected} className={buttonClassName} />);
+  return (
+    <div {...customProps} aria-selected={isSelected} className={buttonClassName}>
+      {text}
+    </div>);
 };
 
 CollapsibleButtonItem.propTypes = propTypes;

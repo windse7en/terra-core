@@ -54,11 +54,18 @@ var defaultProps = {
 
 var CollapsibleButtonItem = function CollapsibleButtonItem(_ref) {
   var isSelected = _ref.isSelected,
-      customProps = _objectWithoutProperties(_ref, ['isSelected']);
+      text = _ref.text,
+      icon = _ref.icon,
+      isReversed = _ref.isReversed,
+      customProps = _objectWithoutProperties(_ref, ['isSelected', 'text', 'icon', 'isReversed']);
 
   var buttonClassName = (0, _classnames2.default)(['terra-CollapsibleButtonItem', { 'terra-CollapsibleButtonItem--selected': isSelected }, customProps.className]);
 
-  return _react2.default.createElement('div', _extends({}, customProps, { 'aria-selected': isSelected, className: buttonClassName }));
+  return _react2.default.createElement(
+    'div',
+    _extends({}, customProps, { 'aria-selected': isSelected, className: buttonClassName }),
+    text
+  );
 };
 
 CollapsibleButtonItem.propTypes = propTypes;

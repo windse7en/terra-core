@@ -24,11 +24,27 @@ const defaultProps = {
   alignment: 'alignStart',
 };
 
-class CollapsibleButtonView extends React.Component {
+class CollapsibleButtonView extends React.Component { 
+  static getSelectedItems(children) {
+    let selectedItems = [];
+    for (let i = 0; i < children.length; i += 1) {
+      if (children[i].props.children) {
+        selectedItems.push(getSelectedValues(sub[i].props.children));
+      } else {
+        return children[i].props.isSelected;
+      }
+    }
+    return selectedItems;
+  }
+
+  static getInitialState(children) {
+    const selectedItems = getSelectedItems(children);
+    return { hiddenIndexes: [], selectedItems , toggled: false};
+  }
 
   constructor(props) {
     super(props);
-    this.state = { hiddenIndexes: [] };
+    this.state = getInitialState(this.props.children);
     this.setContainer = this.setContainer.bind(this);
     this.handleResize = this.handleResize.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
@@ -107,6 +123,38 @@ class CollapsibleButtonView extends React.Component {
     return hiddenChildren;
   }
 
+  handleOnClick(event, index) {
+
+  }
+
+  wrapOnClick(item, index) {
+    const onClick = item.props.onClick;
+    return (event) => {
+      this.handleOnClick(event, index);
+
+      if (onClick) {
+        onClick(event);
+      }
+    };
+  }
+
+  wrapChildComponents(children) {
+    children.map((child, i) => {
+      let onClick;
+      if (isSelectable) {
+        onClick = this.wrapOnClick(child, i);
+      } else {
+        onClick = child.props.onClick;
+      }
+      // recursive wrapped shit
+
+      return React.cloneElement(child, {
+        onClick,
+        isSelected: this.state.selectedIndex === i,
+      });
+    });
+  }
+
   render() {
     const { children,
             alignment,
@@ -118,8 +166,9 @@ class CollapsibleButtonView extends React.Component {
         customProps.className,
       ]);
 
-    const visibleChildren = this.visibleChildComponents(children);
-    const hiddenChildren = this.hiddenChildComponents(children);
+    const wrappedChildren = this.wrapChildComponents(children);
+    const visibleChildren = this.visibleChildComponents(wrappedChildren);
+    const hiddenChildren = this.hiddenChildComponents(wrappedChildren);
 
     let toggle;
     if (hiddenChildren.length > 0) {
@@ -138,7 +187,9 @@ class CollapsibleButtonView extends React.Component {
             );
           })}
         </div>
-        {toggle}
+        <div className="terra-CollapsibleButtonView-toggle">
+          {toggle}
+        </div>
       </div>
     );
   }
