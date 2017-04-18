@@ -6,9 +6,9 @@ import './CollapsibleButtonGroup.scss';
 
 const propTypes = {
   /**
-   * Child nodes
+   * The initial state of selected indexes for the group.
    **/
-  children: PropTypes.node,
+  selectedIndexes: PropTypes.array,
   /**
    * Indicates if the button group should have toggle-style selectability
    **/
@@ -21,13 +21,18 @@ const propTypes = {
    * Callback function when the state changes
    **/
   onChange: PropTypes.func,
+  /**
+   * Child nodes
+   **/
+  children: PropTypes.node,
 };
 
 const defaultProps = {
-  children: undefined,
+  selectedIndexes: [],
   isSelectable: false,
   isHidden: false,
   onChange: undefined,
+  children: undefined,
 };
 
 class CollapsibleButtonGroup extends React.Component {

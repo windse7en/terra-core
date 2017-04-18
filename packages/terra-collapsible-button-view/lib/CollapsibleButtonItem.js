@@ -22,10 +22,6 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 
 var propTypes = {
   /**
-   * Indicates if the button should be selected on initial render.
-   */
-  isSelected: _react.PropTypes.bool,
-  /**
    * Sets the button text
    */
   text: _react.PropTypes.string,
@@ -34,13 +30,21 @@ var propTypes = {
    */
   icon: _react.PropTypes.element,
   /**
-   * Callback function triggered when clicked
-   */
-  onClick: _react.PropTypes.func,
-  /**
    * Reverses the position of the icon and text
    */
   isReversed: _react.PropTypes.bool,
+  /**
+   * Indicates if the button should be selected on initial render.
+   */
+  isSelected: _react.PropTypes.bool,
+  /**
+   * Indidcates if the element is viewed inline or in list style.
+   */
+  isHidden: _react.PropTypes.bool,
+  /**
+   * Callback function triggered when clicked
+   */
+  onClick: _react.PropTypes.func,
   /**
    * Child Nodes
    */
@@ -48,22 +52,30 @@ var propTypes = {
 };
 
 var defaultProps = {
+  text: '',
+  icon: undefined,
+  isReversed: false,
   isSelected: false,
-  isReversed: false
+  isHidden: false,
+  onClick: undefined,
+  children: undefined
 };
 
 var CollapsibleButtonItem = function CollapsibleButtonItem(_ref) {
-  var isSelected = _ref.isSelected,
-      text = _ref.text,
+  var text = _ref.text,
       icon = _ref.icon,
       isReversed = _ref.isReversed,
-      customProps = _objectWithoutProperties(_ref, ['isSelected', 'text', 'icon', 'isReversed']);
+      isSelected = _ref.isSelected,
+      isHidden = _ref.isHidden,
+      onClick = _ref.onClick,
+      children = _ref.children,
+      customProps = _objectWithoutProperties(_ref, ['text', 'icon', 'isReversed', 'isSelected', 'isHidden', 'onClick', 'children']);
 
   var buttonClassName = (0, _classnames2.default)(['terra-CollapsibleButtonItem', { 'terra-CollapsibleButtonItem--selected': isSelected }, customProps.className]);
 
   return _react2.default.createElement(
     'div',
-    _extends({}, customProps, { 'aria-selected': isSelected, className: buttonClassName }),
+    _extends({}, customProps, { className: buttonClassName }),
     text
   );
 };

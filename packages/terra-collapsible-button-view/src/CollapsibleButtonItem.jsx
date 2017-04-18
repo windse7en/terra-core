@@ -5,10 +5,6 @@ import './CollapsibleButtonItem.scss';
 
 const propTypes = {
   /**
-   * Indicates if the button should be selected on initial render.
-   */
-  isSelected: PropTypes.bool,
-  /**
    * Sets the button text
    */
   text: PropTypes.string,
@@ -17,13 +13,21 @@ const propTypes = {
    */
   icon: PropTypes.element,
   /**
-   * Callback function triggered when clicked
-   */
-  onClick: PropTypes.func,
-  /**
    * Reverses the position of the icon and text
    */
   isReversed: PropTypes.bool,
+  /**
+   * Indicates if the button should be selected on initial render.
+   */
+  isSelected: PropTypes.bool,
+  /**
+   * Indidcates if the element is viewed inline or in list style.
+   */
+  isHidden: PropTypes.bool,
+  /**
+   * Callback function triggered when clicked
+   */
+  onClick: PropTypes.func,
   /**
    * Child Nodes
    */
@@ -31,15 +35,23 @@ const propTypes = {
 };
 
 const defaultProps = {
-  isSelected: false,
+  text: '',
+  icon: undefined,
   isReversed: false,
+  isSelected: false,
+  isHidden: false,
+  onClick: undefined,
+  children: undefined,
 };
 
 const CollapsibleButtonItem = ({ 
-  isSelected, 
-  text, 
-  icon, 
-  isReversed, 
+  text,
+  icon,
+  isReversed,
+  isSelected,
+  isHidden,
+  onClick,
+  children,
   ...customProps, 
 }) => {
   const buttonClassName = classNames([
@@ -49,7 +61,7 @@ const CollapsibleButtonItem = ({
   ]);
 
   return (
-    <div {...customProps} aria-selected={isSelected} className={buttonClassName}>
+    <div {...customProps} className={buttonClassName}>
       {text}
     </div>);
 };

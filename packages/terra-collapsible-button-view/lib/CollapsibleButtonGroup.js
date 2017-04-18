@@ -34,9 +34,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var propTypes = {
   /**
-   * Child nodes
+   * The initial state of selected indexes for the group.
    **/
-  children: _react.PropTypes.node,
+  selectedIndexes: _react.PropTypes.array,
   /**
    * Indicates if the button group should have toggle-style selectability
    **/
@@ -48,14 +48,19 @@ var propTypes = {
   /**
    * Callback function when the state changes
    **/
-  onChange: _react.PropTypes.func
+  onChange: _react.PropTypes.func,
+  /**
+   * Child nodes
+   **/
+  children: _react.PropTypes.node
 };
 
 var defaultProps = {
-  children: undefined,
+  selectedIndexes: [],
   isSelectable: false,
   isHidden: false,
-  onChange: undefined
+  onChange: undefined,
+  children: undefined
 };
 
 var CollapsibleButtonGroup = function (_React$Component) {
