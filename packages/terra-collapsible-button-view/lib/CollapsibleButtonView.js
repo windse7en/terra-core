@@ -90,9 +90,9 @@ var CollapsibleButtonView = function (_React$Component) {
       return selectedIndexes;
     }
   }, {
-    key: 'isIndexPathValue',
-    value: function isIndexPathValue(selectedIndexes, indexPath) {
-      var currentValue = selectedIndexes;
+    key: 'indexPathValueFromNestedArrays',
+    value: function indexPathValueFromNestedArrays(nestedArrays, indexPath) {
+      var currentValue = nestedArrays;
       while (indexPath.length > 0) {
         currentValue = currentValue[indexPath.pop()];
       }
@@ -251,10 +251,10 @@ var CollapsibleButtonView = function (_React$Component) {
 
         if (_this5.props.children[child].type.displayName !== 'CollapsibleButtonGroup') {
           newProps.onChange = _this5.wrapOnChange(child);
-          newProps.selectedIndexes = CollapsibleButtonView.isIndexPathValue(_this5.state.selectedIndexes, indexPath);
+          newProps.selectedIndexes = CollapsibleButtonView.indexPathValueFromNestedArrays(_this5.state.selectedIndexes, indexPath);
         } else {
           newProps.onClick = _this5.wrapOnClick(child);
-          newProps.isSelected = CollapsibleButtonView.isIndexPathValue(_this5.state.selectedIndexes, indexPath);
+          newProps.isSelected = CollapsibleButtonView.indexPathValueFromNestedArrays(_this5.state.selectedIndexes, indexPath);
         }
 
         if (_this5.child.children.length > 0) {

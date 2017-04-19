@@ -49,8 +49,8 @@ class CollapsibleButtonView extends React.Component {
     return selectedIndexes;
   }
 
-  static isIndexPathValue(selectedIndexes, indexPath) {
-    let currentValue = selectedIndexes;
+  static indexPathValueFromNestedArrays(nestedArrays, indexPath) {
+    let currentValue = nestedArrays;
     while (indexPath.length > 0) {
       currentValue = currentValue[indexPath.pop()];
     }
@@ -180,10 +180,10 @@ class CollapsibleButtonView extends React.Component {
 
       if (this.props.children[child].type.displayName !== 'CollapsibleButtonGroup') {
         newProps.onChange = this.wrapOnChange(child);
-        newProps.selectedIndexes = CollapsibleButtonView.isIndexPathValue(this.state.selectedIndexes, indexPath);
+        newProps.selectedIndexes = CollapsibleButtonView.indexPathValueFromNestedArrays(this.state.selectedIndexes, indexPath);
       } else {
         newProps.onClick = this.wrapOnClick(child);
-        newProps.isSelected = CollapsibleButtonView.isIndexPathValue(this.state.selectedIndexes, indexPath);
+        newProps.isSelected = CollapsibleButtonView.indexPathValueFromNestedArrays(this.state.selectedIndexes, indexPath);
       }
 
       if (this.child.children.length > 0) {
