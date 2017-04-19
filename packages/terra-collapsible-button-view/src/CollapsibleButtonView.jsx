@@ -26,26 +26,40 @@ const defaultProps = {
 
 class CollapsibleButtonView extends React.Component { 
   static childFromIndexPath(children, indexPath) {
-    const child = children[indexPath.pop()];
+    let child;
+    let currentChildren = children;
 
-    return childFromIndexPath(children[indexPath.pop()], indexPath);
+    while (indexPath.length > 0) {
+      child = currentChildren ? currentChildren[indexPath.pop()] : null;
+      currentChildren = child ? child.children : null;
+    }
+
+    return child;
   }
 
-  static getSelectedItems(children) {
-    let selectedItems = [];
+  static getSelectedIndexes(children) {
+    let selectedIndexes = [];
     for (let i = 0; i < children.length; i += 1) {
       if (children[i].props.children) {
-        selectedItems.push(getSelectedValues(sub[i].props.children));
+        selectedIndexes.push(getSelectedValues(sub[i].props.children));
       } else {
         return children[i].props.isSelected;
       }
     }
-    return selectedItems;
+    return selectedIndexes;
+  }
+
+  static isIndexPathValue(selectedIndexes, indexPath) {
+    let currentValue = selectedIndexes;
+    while (indexPath.length > 0) {
+      currentValue = currentValue[indexPath.pop()];
+    }
+    return currentValue;
   }
 
   static getInitialState(children) {
-    const selectedItems = getSelectedItems(children);
-    return { hiddenIndexes: [], selectedItems , toggleOpen: false};
+    const selectedIndexes = getSelectedIndexes(children);
+    return { hiddenIndexes: [], selectedIndexes , toggleOpen: false};
   }
 
   constructor(props) {
@@ -166,20 +180,15 @@ class CollapsibleButtonView extends React.Component {
 
       if (this.props.children[child].type.displayName !== 'CollapsibleButtonGroup') {
         newProps.onChange = this.wrapOnChange(child);
+        newProps.selectedIndexes = CollapsibleButtonView.isIndexPathValue(this.state.selectedIndexes, indexPath);
       } else {
         newProps.onClick = this.wrapOnClick(child);
+        newProps.isSelected = CollapsibleButtonView.isIndexPathValue(this.state.selectedIndexes, indexPath);
       }
 
       if (this.child.children.length > 0) {
         this.wrapChildComponents(this.child.children, i);
       }
-      // let onClick;
-      // if (isSelectable) {
-      //   onClick = this.wrapOnClick(child, i);
-      // } else {
-      //   onClick = child.props.onClick;
-      // }
-      // // recursive wrapped shit
 
       return React.cloneElement(child, {
         onClick,

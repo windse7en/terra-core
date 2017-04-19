@@ -65,39 +65,44 @@ var CollapsibleButtonView = function (_React$Component) {
 
   _createClass(CollapsibleButtonView, null, [{
     key: 'childFromIndexPath',
-    value: function (_childFromIndexPath) {
-      function childFromIndexPath(_x, _x2) {
-        return _childFromIndexPath.apply(this, arguments);
+    value: function childFromIndexPath(children, indexPath) {
+      var child = void 0;
+      var currentChildren = children;
+
+      while (indexPath.length > 0) {
+        child = currentChildren ? currentChildren[indexPath.pop()] : null;
+        currentChildren = child ? child.children : null;
       }
 
-      childFromIndexPath.toString = function () {
-        return _childFromIndexPath.toString();
-      };
-
-      return childFromIndexPath;
-    }(function (children, indexPath) {
-      var child = children[indexPath.pop()];
-
-      return childFromIndexPath(children[indexPath.pop()], indexPath);
-    })
+      return child;
+    }
   }, {
-    key: 'getSelectedItems',
-    value: function getSelectedItems(children) {
-      var selectedItems = [];
+    key: 'getSelectedIndexes',
+    value: function getSelectedIndexes(children) {
+      var selectedIndexes = [];
       for (var i = 0; i < children.length; i += 1) {
         if (children[i].props.children) {
-          selectedItems.push(getSelectedValues(sub[i].props.children));
+          selectedIndexes.push(getSelectedValues(sub[i].props.children));
         } else {
           return children[i].props.isSelected;
         }
       }
-      return selectedItems;
+      return selectedIndexes;
+    }
+  }, {
+    key: 'isIndexPathValue',
+    value: function isIndexPathValue(selectedIndexes, indexPath) {
+      var currentValue = selectedIndexes;
+      while (indexPath.length > 0) {
+        currentValue = currentValue[indexPath.pop()];
+      }
+      return currentValue;
     }
   }, {
     key: 'getInitialState',
     value: function getInitialState(children) {
-      var selectedItems = getSelectedItems(children);
-      return { hiddenIndexes: [], selectedItems: selectedItems, toggleOpen: false };
+      var selectedIndexes = getSelectedIndexes(children);
+      return { hiddenIndexes: [], selectedIndexes: selectedIndexes, toggleOpen: false };
     }
   }]);
 
@@ -246,20 +251,15 @@ var CollapsibleButtonView = function (_React$Component) {
 
         if (_this5.props.children[child].type.displayName !== 'CollapsibleButtonGroup') {
           newProps.onChange = _this5.wrapOnChange(child);
+          newProps.selectedIndexes = CollapsibleButtonView.isIndexPathValue(_this5.state.selectedIndexes, indexPath);
         } else {
           newProps.onClick = _this5.wrapOnClick(child);
+          newProps.isSelected = CollapsibleButtonView.isIndexPathValue(_this5.state.selectedIndexes, indexPath);
         }
 
         if (_this5.child.children.length > 0) {
           _this5.wrapChildComponents(_this5.child.children, i);
         }
-        // let onClick;
-        // if (isSelectable) {
-        //   onClick = this.wrapOnClick(child, i);
-        // } else {
-        //   onClick = child.props.onClick;
-        // }
-        // // recursive wrapped shit
 
         return _react2.default.cloneElement(child, {
           onClick: onClick,
