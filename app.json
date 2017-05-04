@@ -6,7 +6,7 @@
     "HTML5",
     "scalpel"
   ],
-  "website": "https://small-sharp-tool.com/",
+  "website": "http://engineering.cerner.com/terra-core/#/site",
   "repository": "https://github.com/windse7en/terra-core",
   "success_url": "/",
   "scripts": {},
@@ -19,7 +19,7 @@
   "formation": {
     "web": {
       "quantity": 2,
-      "size": "Performance-M"
+      "size": "free"
     }
   },
   "image": "heroku/ruby",
